@@ -5,6 +5,7 @@
     <p>To stack the cards back up into a single pile.</p>
     <h3>The Rules</h3>
     <p>Any pile can be moved onto the pile to its left or the third pile to its left provided the top cards fo the piles match in either suit or value.</p>
+    <h3>Cards remaining: {{ cardsRemaining }}</h3>
   </div>
 </template>
 

@@ -12,14 +12,12 @@ export default {
   props: ["card"],
   methods: {
     handleCardSelect(){
-      this.card["selected"] = true;
-
       eventBus.$emit('card-selected', this.card)
     }
   },
   computed: {
     cardSelected(){
-      return this.card["selected"] ? "selected" : "not-selected"
+      return this.card.selected ? "selected" : "not-selected"
     }
   }
 }
