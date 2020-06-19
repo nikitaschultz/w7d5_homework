@@ -6,13 +6,19 @@
     <h3>The Rules</h3>
     <p>Any pile can be moved onto the pile to its left or the third pile to its left provided the top cards fo the piles match in either suit or value.</p>
     <h3>Cards remaining: {{ cardsRemaining }}</h3>
+    <card-item v-if="removedCard" :card="removedCard"></card-item>
   </div>
 </template>
 
 <script>
+import CardItem from './CardItem.vue';
+
 export default {
   name: "game-menu",
-  props: ["cardsRemaining"]
+  props: ["cardsRemaining", "removedCard"],
+  components: {
+    "card-item": CardItem
+  }
 }
 </script>
 

@@ -5,7 +5,7 @@
     <h2>Accordion Solitaire</h2><br>
     <div class="game-content">
       <cards-in-play :cardsInPlay="cardsInPlay"></cards-in-play>
-      <game-menu :cardsRemaining="cardsRemaining"></game-menu>
+      <game-menu :cardsRemaining="cardsRemaining" :removedCard="removedCard"></game-menu>
   </div>
     </div>
 </template>
@@ -20,7 +20,8 @@ export default {
   data(){
     return {
       cardsInPlay: null,
-      selectedCard: null
+      selectedCard: null,
+      removedCard: null
     }
   },
   mounted(){
@@ -36,10 +37,15 @@ export default {
     eventBus.$on('card-selected', (card) => {
       if(this.selectedCard){
         if(this.attemptMove(this.selectedCard, card)){
-          console.log("GOOD MOVE!");
           this.selectedCard.selected = false;
-          card.selected = true;
-          this.selectedCard = card;
+          card.selected = false;
+          this.removedCard = card;
+          const removedIndex = this.cardsInPlay.indexOf(card);
+          const selectedIndex = this.cardsInPlay.indexOf(this.selectedCard);
+          this.cardsInPlay[removedIndex] = this.selectedCard;
+          console.log(selectedIndex);
+          this.cardsInPlay.splice(selectedIndex, 1);
+
         }else{
           this.selectedCard.selected = false;
           card.selected = true;
