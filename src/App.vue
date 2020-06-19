@@ -1,28 +1,26 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+<template lang="html">
+  <div class="page-content">
+    <h1>Let's Play</h1>
+    <h2>Accordion Solitaire</h2>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: "app",
+  data(){
+    return {
+      cardsInPlay: null,
+      selectedCard: null
+    }
+  },
+  mounted(){
+    fetch('https://deckofcardsapi.com/api/deck/new/draw/?count=52')
+    .then(response => response.json())
+    .then(data => this.cardsInPlay = data.cards)
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="css" scoped>
 </style>
