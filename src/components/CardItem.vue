@@ -1,6 +1,6 @@
 <template lang="html">
-  <div v-on:click="handleCardSelect" class="card">
-    <img id="card-image" :class="cardSelected" :src="card.image" alt="card_image" height="90px">
+  <div v-if="card" v-on:click="handleCardSelect" class="card">
+    <img id="card-image" :class="cardSelected" :src="card.image" alt="card_image" width="70px">
   </div>
 </template>
 

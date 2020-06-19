@@ -24,7 +24,7 @@ export default {
     flex-direction: row;
     width: 68%;
     padding: 1%;
-    background-color: lavender;
+    background-color: #92a8d1;
   }
 
 </style>
