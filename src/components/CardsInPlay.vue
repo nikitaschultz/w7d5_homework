@@ -22,6 +22,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: flex-start;
     width: 68%;
     padding: 1%;
     background-color: #6c7b95;

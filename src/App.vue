@@ -4,8 +4,9 @@
     <h1>Let's Play</h1>
     <h2>Accordion Solitaire</h2><br>
     <div class="game-content">
+      <loading-screen v-if="loadingStatus"></loading-screen>
       <win-screen v-if="winStatus" :card="cardsInPlay[0]"></win-screen>
-      <cards-in-play v-if="!winStatus" :cardsInPlay="cardsInPlay"></cards-in-play>
+      <cards-in-play v-if="!winStatus && !loadingStatus" :cardsInPlay="cardsInPlay"></cards-in-play>
       <game-menu :cardsRemaining="cardsRemaining" :removedCards="removedCards"></game-menu>
   </div>
     </div>
@@ -16,6 +17,7 @@ import { eventBus } from './main.js';
 import CardsInPlay from './components/CardsInPlay.vue';
 import GameMenu from './components/GameMenu.vue';
 import WinScreen from './components/WinScreen';
+import LoadingScreen from './components/LoadingScreen';
 
 export default {
   name: "app",
@@ -25,10 +27,12 @@ export default {
       selectedCard: null,
       removedCards: [],
       lastMoves: [],
-      winStatus: null
+      winStatus: null,
+      loadingStatus: null
     }
   },
   mounted(){
+    this.loadingStatus = true;
     fetch('https://deckofcardsapi.com/api/deck/new/draw/?count=52')
     .then(response => response.json())
     .then((data) => {
@@ -36,11 +40,16 @@ export default {
         card.selected = false;
       })
       this.cardsInPlay = data.cards
+      this.loadingStatus = false;
     })
 
     eventBus.$on('card-selected', (card) => {
       if(this.selectedCard){
-        if(this.attemptMove(this.selectedCard, card)){
+        if(card === this.selectedCard){
+          this.deselectPotentialCards();
+          card.selected = false;
+          this.selectedCard = null;
+        }else if(this.attemptMove(this.selectedCard, card)){
           this.deselectPotentialCards();
           this.selectedCard.selected = false;
           card.selected = false;
@@ -68,6 +77,8 @@ export default {
     })
 
     eventBus.$on('undo', () => {
+      this.deselectPotentialCards();
+      this.selectedCard = null;
       const lastCard = this.removedCards.splice(0,1);
       const lastMove = this.lastMoves.splice(0,1);
       this.cardsInPlay.splice(lastMove[0][0], 0, this.cardsInPlay[lastMove[0][1]]);
@@ -77,7 +88,8 @@ export default {
   components: {
     "cards-in-play": CardsInPlay,
     "game-menu": GameMenu,
-    "win-screen": WinScreen
+    "win-screen": WinScreen,
+    "loading-screen": LoadingScreen
   },
   methods: {
     attemptMove(selectedCard, moveCard){
