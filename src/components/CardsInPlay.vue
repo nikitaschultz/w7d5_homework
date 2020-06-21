@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="cards">
+  <div id="cards">
     <card-item v-if="cardsInPlay" v-for="(card, index) in cardsInPlay" :card="card" :key="index"></card-item>
   </div>
 </template>
@@ -18,7 +18,7 @@ export default {
 
 <style lang="css" scoped>
 
-  .cards {
+  #cards {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;

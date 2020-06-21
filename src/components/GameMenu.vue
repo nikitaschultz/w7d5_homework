@@ -6,7 +6,10 @@
     <h3>The Rules</h3>
     <p>Any card can replace the card to its left or the third card to its left provided they match in either suit or value.</p>
     <h3>Cards remaining: {{ cardsRemaining }}</h3>
-    <button v-on:click="handleUndo" type="button" name="Undo" class="undo-button">Undo</button><br>
+    <div class="buttons">
+      <button v-on:click="handleUndo" type="button" name="Undo" class="button">Undo</button>
+      <button v-on:click="handleRestart" type="button" name="Restart" class="button">Restart</button><br>
+    </div>
     <div class="cards-remaining">
       <card-item v-if="removedCards" :card="removedCards[0]"></card-item>
       <card-item v-if="removedCards" :card="removedCards[1]"></card-item>
@@ -28,6 +31,9 @@ export default {
   methods: {
     handleUndo(){
       eventBus.$emit('undo')
+    },
+    handleRestart(){
+      location.reload()
     }
   }
 }
@@ -55,7 +61,7 @@ export default {
     color: #f7786b;
   }
 
-  .undo-button {
+  .button {
     border: solid 1px #f7786b;
     color: #f7786b;
     font-family: 'MuseoModerno', cursive;
@@ -63,6 +69,10 @@ export default {
     height: 30px;
     width: 70px;
     margin: 5px 0px 0px 0px;
+  }
+
+  .buttons {
+    display: flex;
   }
 
 </style>

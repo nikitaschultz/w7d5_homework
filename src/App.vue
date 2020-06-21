@@ -4,7 +4,8 @@
     <h1>Let's Play</h1>
     <h2>Accordion Solitaire</h2><br>
     <div class="game-content">
-      <cards-in-play :cardsInPlay="cardsInPlay"></cards-in-play>
+      <win-screen v-if="winStatus" :card="cardsInPlay[0]"></win-screen>
+      <cards-in-play v-if="!winStatus" :cardsInPlay="cardsInPlay"></cards-in-play>
       <game-menu :cardsRemaining="cardsRemaining" :removedCards="removedCards"></game-menu>
   </div>
     </div>
@@ -14,6 +15,7 @@
 import { eventBus } from './main.js';
 import CardsInPlay from './components/CardsInPlay.vue';
 import GameMenu from './components/GameMenu.vue';
+import WinScreen from './components/WinScreen';
 
 export default {
   name: "app",
@@ -22,7 +24,8 @@ export default {
       cardsInPlay: null,
       selectedCard: null,
       removedCards: [],
-      lastMoves: []
+      lastMoves: [],
+      winStatus: null
     }
   },
   mounted(){
@@ -48,18 +51,19 @@ export default {
           this.cardsInPlay.splice(selectedIndex, 1);
           this.deselectPotentialCards()
           this.selectedCard = null;
+          this.checkForWin();
         }else{
-          this.deselectPotentialCards()
+          this.deselectPotentialCards();
           this.selectedCard.selected = false;
           card.selected = true;
           this.selectedCard = card;
-          this.selectPotentialCards()
+          this.selectPotentialCards();
         }
       }else{
-        this.deselectPotentialCards()
+        this.deselectPotentialCards();
         card.selected = true;
         this.selectedCard = card;
-        this.selectPotentialCards()
+        this.selectPotentialCards();
       }
     })
 
@@ -72,7 +76,8 @@ export default {
   },
   components: {
     "cards-in-play": CardsInPlay,
-    "game-menu": GameMenu
+    "game-menu": GameMenu,
+    "win-screen": WinScreen
   },
   methods: {
     attemptMove(selectedCard, moveCard){
@@ -104,13 +109,18 @@ export default {
       if(this.potentialCard2){
         this.potentialCard2.selected = false;
       }
+    },
+    checkForWin(){
+      if(this.cardsRemaining === 0){
+        this.winStatus = true;
+      }
     }
   },
   computed: {
     cardsRemaining(){
       let value = 0
       if(this.cardsInPlay){
-        value = this.cardsInPlay.length - 1
+        value = this.cardsInPlay.length - 51;
       }
       return value;
     },
