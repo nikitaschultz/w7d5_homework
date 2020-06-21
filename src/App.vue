@@ -41,6 +41,7 @@ export default {
     eventBus.$on('card-selected', (card) => {
       if(this.selectedCard){
         if(this.attemptMove(this.selectedCard, card)){
+          this.deselectPotentialCards();
           this.selectedCard.selected = false;
           card.selected = false;
           this.removedCards.unshift(card);
@@ -49,7 +50,6 @@ export default {
           this.lastMoves.unshift([selectedIndex, removedIndex]);
           this.cardsInPlay[removedIndex] = this.selectedCard;
           this.cardsInPlay.splice(selectedIndex, 1);
-          this.deselectPotentialCards()
           this.selectedCard = null;
           this.checkForWin();
         }else{
@@ -120,7 +120,7 @@ export default {
     cardsRemaining(){
       let value = 0
       if(this.cardsInPlay){
-        value = this.cardsInPlay.length - 51;
+        value = this.cardsInPlay.length - 1;
       }
       return value;
     },
@@ -153,7 +153,6 @@ export default {
    display: flex;
    align-items: center;
    flex-direction: column;
-   background-color: ghostwhite;
    font-family: 'MuseoModerno', cursive;
  }
 
@@ -163,7 +162,7 @@ export default {
 
   h1, h2 {
     margin: 5px;
-    color: #034f84;
+    color: #fcbf1e;
   }
 
 </style>

@@ -30,11 +30,11 @@ export default {
   }
 
   #card-image:hover {
-    box-shadow: 0px 0px 7px 3px lightgoldenrodyellow;
+    box-shadow: 0px 0px 7px 3px #fcbf1e;
   }
 
   .selected {
-    box-shadow: 0px 0px 7px 3px lightgoldenrodyellow;
+    box-shadow: 0px 0px 7px 3px #fcbf1e;
   }
 
   .not-selected {

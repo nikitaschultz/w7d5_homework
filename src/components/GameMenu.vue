@@ -42,7 +42,7 @@ export default {
 <style lang="css" scoped>
 
   .menu {
-    background-color: #f7cac9;
+    background-color: #8bbabb;
     width: 24%;
     padding: 2%;
     margin: 0px 1%;
@@ -58,21 +58,34 @@ export default {
 
   h2, h3 {
     margin: 2px;
-    color: #f7786b;
+    color: #464159;
   }
 
   .button {
-    border: solid 1px #f7786b;
-    color: #f7786b;
+    border: solid 1px #464159;
+    border-radius: 8px;
+    color: #464159;
     font-family: 'MuseoModerno', cursive;
     background-color: ghostwhite;
     height: 30px;
-    width: 70px;
-    margin: 5px 0px 0px 0px;
+    width: 80px;
+    margin: 5px 5px 0px 5px;
   }
 
   .buttons {
     display: flex;
+    justify-content: space-between;
+  }
+
+  button:hover {
+    border: solid 1px white;
+    border-radius: 8px;
+    color: white;
+    background: #464159;
+    font-family: 'MuseoModerno', cursive;
+    height: 30px;
+    width: 80px;
+    margin: 5px 5px 0px 5px;
   }
 
 </style>

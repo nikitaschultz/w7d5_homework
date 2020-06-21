@@ -24,7 +24,7 @@ export default {
     flex-direction: row;
     width: 68%;
     padding: 1%;
-    background-color: #92a8d1;
+    background-color: #6c7b95;
   }
 
 </style>
