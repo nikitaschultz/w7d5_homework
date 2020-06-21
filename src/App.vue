@@ -78,6 +78,7 @@ export default {
 
     eventBus.$on('undo', () => {
       this.deselectPotentialCards();
+      this.selectedCard.selected = false;
       this.selectedCard = null;
       const lastCard = this.removedCards.splice(0,1);
       const lastMove = this.lastMoves.splice(0,1);
