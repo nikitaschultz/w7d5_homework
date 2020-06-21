@@ -77,13 +77,13 @@ export default {
     })
 
     eventBus.$on('undo', () => {
-      this.deselectPotentialCards();
-      this.selectedCard.selected = false;
-      this.selectedCard = null;
       const lastCard = this.removedCards.splice(0,1);
       const lastMove = this.lastMoves.splice(0,1);
       this.cardsInPlay.splice(lastMove[0][0], 0, this.cardsInPlay[lastMove[0][1]]);
       this.cardsInPlay.splice(lastMove[0][1], 1, lastCard[0]);
+      this.deselectPotentialCards();
+      this.selectedCard.selected = false;
+      this.selectedCard = null;
     })
   },
   components: {
@@ -133,7 +133,7 @@ export default {
     cardsRemaining(){
       let value = 0
       if(this.cardsInPlay){
-        value = this.cardsInPlay.length - 1;
+        value = this.cardsInPlay.length - 20;
       }
       return value;
     },
