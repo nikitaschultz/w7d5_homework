@@ -133,7 +133,7 @@ export default {
     cardsRemaining(){
       let value = 0
       if(this.cardsInPlay){
-        value = this.cardsInPlay.length - 20;
+        value = this.cardsInPlay.length - 1;
       }
       return value;
     },
