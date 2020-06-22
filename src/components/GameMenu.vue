@@ -2,18 +2,18 @@
   <div class="menu">
     <h2>How to Play</h2>
     <h3>The Object of the Game</h3>
-    <p>To stack the cards back up into a single pile.</p>
+    <p>To stack the cards back up into a single pile.</p><br>
     <h3>The Rules</h3>
-    <p>Any card can replace the card to its left or the third card to its left provided they match in either suit or value.</p>
-    <h3>Cards remaining: {{ cardsRemaining }}</h3>
-    <div class="buttons">
-      <button v-on:click="handleUndo" type="button" name="Undo" class="button">Undo</button>
-      <button v-on:click="handleRestart" type="button" name="Restart" class="button">Restart</button><br>
-    </div>
+    <p>Any card can replace the card to its left or the third card to its left provided they match in either suit or value.</p><br>
+    <h3>Cards remaining: {{ cardsRemaining }}</h3><br>
     <div class="cards-remaining">
       <card-item v-if="removedCards" :card="removedCards[0]"></card-item>
       <card-item v-if="removedCards" :card="removedCards[1]"></card-item>
       <card-item v-if="removedCards" :card="removedCards[2]"></card-item>
+    </div><br>
+    <div class="buttons">
+      <button v-on:click="handleUndo" type="button" name="Undo" class="button">Undo</button>
+      <button v-on:click="handleRestart" type="button" name="Restart" class="button">Restart</button>
     </div>
   </div>
 </template>
@@ -49,27 +49,36 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: 'MuseoModerno', cursive;
   }
 
   .cards-remaining {
     display: flex;
   }
 
-  h2, h3 {
+  h2 {
     margin: 2px;
     color: #464159;
+  }
+
+  h3 {
+    margin: 0px;
+    color: #464159;
+  }
+
+  p {
+    font-weight: lighter;
+    margin: 0px;
   }
 
   .button {
     border: solid 1px #464159;
     border-radius: 8px;
     color: #464159;
-    font-family: 'MuseoModerno', cursive;
     background-color: ghostwhite;
     height: 30px;
     width: 80px;
     margin: 5px 5px 0px 5px;
+    font-family: 'MuseoModerno';
   }
 
   .buttons {
@@ -82,10 +91,10 @@ export default {
     border-radius: 8px;
     color: white;
     background: #464159;
-    font-family: 'MuseoModerno', cursive;
     height: 30px;
     width: 80px;
     margin: 5px 5px 0px 5px;
+    font-family: 'MuseoModerno';
   }
 
 </style>

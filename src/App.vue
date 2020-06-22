@@ -166,7 +166,6 @@ export default {
    display: flex;
    align-items: center;
    flex-direction: column;
-   font-family: 'MuseoModerno', cursive;
  }
 
  .game-content {
